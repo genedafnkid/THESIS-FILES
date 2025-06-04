@@ -11,7 +11,7 @@
                 <!-- Modules -->
                 <div class="bg-blue-100 p-6 rounded-lg shadow hover:shadow-lg transition">
                     <h2 class="text-2xl font-semibold text-blue-800 mb-2">📚 Modules</h2>
-                    <p class="text-gray-600">Access your lessons and theological courses.</p>
+                    <p class="text-gray-600">Access your lessons and theological courses. sef ef</p>
                 </div>
 
                 <!-- Progress Tracking -->
