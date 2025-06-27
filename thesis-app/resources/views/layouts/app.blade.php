@@ -29,6 +29,7 @@
 
             <!-- Page Content -->
             <main>
+                @yield('content') {{-- ✅ This line is the key --}}
             </main>
         </div>
     </body>
