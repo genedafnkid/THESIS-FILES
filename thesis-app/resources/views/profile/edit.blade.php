@@ -1,29 +1,33 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.app')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+@section('content')
+<div class="py-12 bg-gray-100 min-h-screen">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
+        <!-- Profile Info -->
+        <div class="bg-gradient-to-r from-pink-500 to-purple-600 p-[2px] rounded-xl shadow-lg">
+            <div class="bg-white rounded-xl p-6">
+                <h2 class="text-2xl font-semibold text-pink-700 mb-4">👤 Profile Information</h2>
+                @include('profile.partials.update-profile-information-form')
             </div>
         </div>
+
+        <!-- Update Password -->
+        <div class="bg-gradient-to-r from-pink-500 to-purple-600 p-[2px] rounded-xl shadow-lg">
+            <div class="bg-white rounded-xl p-6">
+                <h2 class="text-2xl font-semibold text-pink-700 mb-4">🔐 Update Password</h2>
+                @include('profile.partials.update-password-form')
+            </div>
+        </div>
+
+        <!-- Delete Account -->
+        <div class="bg-gradient-to-r from-pink-500 to-purple-600 p-[2px] rounded-xl shadow-lg">
+            <div class="bg-white rounded-xl p-6">
+                <h2 class="text-2xl font-semibold text-pink-700 mb-4">⚠️ Delete Account</h2>
+                @include('profile.partials.delete-user-form')
+            </div>
+        </div>
+
     </div>
-</x-app-layout>
+</div>
+@endsection
