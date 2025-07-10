@@ -7,7 +7,7 @@
         <h1 class="text-2xl font-extrabold mb-6 tracking-wide">Theology Classroom</h1>
         <nav class="space-y-4 font-medium">
             <a href="#" class="block hover:text-purple-200">📊 Dashboard</a>
-            <a href="#" class="block hover:text-purple-200">📚 Modules</a>
+            <a href="{{ route('modules') }}" class="block hover:text-purple-200">📚 Modules</a>
             <a href="{{ route('community') }}" class="block hover:text-purple-200">🤝 Community</a>
             <a href="#" class="block hover:text-purple-200">⚙️ Settings</a>
         </nav>

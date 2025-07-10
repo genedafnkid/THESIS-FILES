@@ -6,8 +6,8 @@
     <aside class="w-64 bg-gradient-to-br from-pink-600 to-purple-700 text-white p-6 hidden md:block">
         <h1 class="text-2xl font-extrabold mb-6 tracking-wide">Theology Classroom</h1>
         <nav class="space-y-4 font-medium">
-            <a href="#" class="block hover:text-purple-200">📊 Dashboard</a>
-            <a href="#" class="block hover:text-purple-200">📚 Modules</a>
+             <a href="{{ route('dashboard') }}" class="block hover:text-purple-200">📊 Dashboard</a>
+            <a href="{{ route('modules') }}" class="block hover:text-purple-200">📚 Modules</a>
             <a href="#" class="block hover:text-purple-200">🤝 Community</a>
             <a href="#" class="block hover:text-purple-200">⚙️ Settings</a>
         </nav>
