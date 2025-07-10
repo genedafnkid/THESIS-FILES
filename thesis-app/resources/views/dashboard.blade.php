@@ -8,10 +8,7 @@
         <nav class="space-y-4 font-medium">
             <a href="#" class="block hover:text-purple-200">📊 Dashboard</a>
             <a href="#" class="block hover:text-purple-200">📚 Modules</a>
-            <a href="#" class="block hover:text-purple-200">📝 Quizzes</a>
-            <a href="#" class="block hover:text-purple-200">📂 Assignments</a>
-            <a href="#" class="block hover:text-purple-200">🤝 Community</a>
-            <a href="#" class="block hover:text-purple-200">📖 Spiritual Journal</a>
+            <a href="{{ route('community') }}" class="block hover:text-purple-200">🤝 Community</a>
             <a href="#" class="block hover:text-purple-200">⚙️ Settings</a>
         </nav>
     </aside>
