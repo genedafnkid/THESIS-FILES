@@ -7,11 +7,8 @@
         <h1 class="text-2xl font-extrabold mb-6 tracking-wide">Theology Classroom</h1>
         <nav class="space-y-4 font-medium">
             <a href="#" class="block hover:text-purple-200">📊 Dashboard</a>
-            <a href="#" class="block hover:text-purple-200">📚 Modules</a>
-            <a href="#" class="block hover:text-purple-200">📝 Quizzes</a>
-            <a href="#" class="block hover:text-purple-200">📂 Assignments</a>
-            <a href="#" class="block hover:text-purple-200">🤝 Community</a>
-            <a href="#" class="block hover:text-purple-200">📖 Spiritual Journal</a>
+            <a href="{{ route('modules') }}" class="block hover:text-purple-200">📚 Modules</a>
+            <a href="{{ route('community') }}" class="block hover:text-purple-200">🤝 Community</a>
             <a href="#" class="block hover:text-purple-200">⚙️ Settings</a>
         </nav>
     </aside>
@@ -42,36 +39,44 @@
 
         <!-- Dashboard Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500">
-                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                    <h2 class="text-2xl font-semibold text-purple-700 mb-2">📚 Modules</h2>
-                    <p class="text-gray-600">Access your lessons and theological courses.</p>
+            <!-- 📚 Modules (clickable) -->
+            <a href="{{ route('modules') }}" class="block h-full">
+                <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500 h-full">
+                    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition h-full min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-2xl font-semibold text-purple-700 mb-2">📚 Modules</h2>
+                        <p class="text-gray-600">Access your lessons and theological courses.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-            <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500">
-                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+            <!-- 📈 Progress (unchanged but matched height) -->
+            <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500 h-full">
+                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition h-full min-h-[160px] flex flex-col justify-center">
                     <h2 class="text-2xl font-semibold text-purple-700 mb-2">📈 Progress</h2>
                     <p class="text-gray-600">Track your learning journey and spiritual growth.</p>
                 </div>
             </div>
 
-            <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500">
-                <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-                    <h2 class="text-2xl font-semibold text-purple-700 mb-2">🤝 Community</h2>
-                    <p class="text-gray-600">Join discussions and prayer groups with classmates.</p>
+            <!-- 🤝 Community (clickable) -->
+            <a href="{{ route('community') }}" class="block h-full">
+                <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500 h-full">
+                    <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition h-full min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-2xl font-semibold text-purple-700 mb-2">🤝 Community</h2>
+                        <p class="text-gray-600">Join discussions and prayer groups with classmates.</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
+
 
         <!-- 2D Interactive Classroom -->
         <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 mb-8">
             <div class="bg-white p-6 rounded-xl shadow-md">
                 <h3 class="text-2xl font-bold text-purple-700 mb-4">🕊️ Virtual Faith Room</h3>
                 <p class="text-gray-600 mb-4">Launch the 2D interactive theology classroom to begin your immersive experience.</p>
-                <button class="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">
+                <a href="{{ route('faith-room') }}" class="inline-block bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition">
                     Enter 2D Classroom
-                </button>
+                </a>
             </div>
         </div>
 
