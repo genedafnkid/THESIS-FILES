@@ -49,13 +49,16 @@
                 </div>
             </a>
 
-            <!-- 📈 Progress (unchanged but matched height) -->
+            <!-- 📈 Progress (Student Only) -->
+            @role('student')
             <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500 h-full">
                 <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition h-full min-h-[160px] flex flex-col justify-center">
                     <h2 class="text-2xl font-semibold text-purple-700 mb-2">📈 Progress</h2>
                     <p class="text-gray-600">Track your learning journey and spiritual growth.</p>
                 </div>
             </div>
+            @endrole
+
 
             <!-- 🤝 Community (clickable) -->
             <a href="{{ route('community') }}" class="block h-full">
