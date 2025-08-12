@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ModuleController;
 
 
 // 🔓 Public Route
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
     // 📘 Community
     Route::get('/community', [CommunityController::class, 'index'])->name('community');
     Route::post('/community', [CommunityController::class, 'store'])->name('community.store');
+    Route::post('/community/{post}/reply', [CommunityController::class, 'reply'])->name('community.reply');
+
 
     // 📚 Modules
     Route::get('/modules', fn() => view('modules'))->name('modules');
@@ -49,6 +52,9 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:student'])->group(function () {
         Route::get('/student/dashboard', [StudentController::class, 'index']);
     });
+
+    Route::resource('modules', ModuleController::class);
+
 
 });
 

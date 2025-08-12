@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles; // <-- Import HasRoles for RBAC
+use Spatie\Permission\Traits\HasRoles; // Role & Permission management
 use App\Models\Post;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles; // <-- Add HasRoles here
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -44,10 +44,18 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the posts written by the user.
+     * Get all posts created by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+    
 }

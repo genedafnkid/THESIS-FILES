@@ -7,7 +7,7 @@
         <h1 class="text-2xl font-extrabold mb-6 tracking-wide">Theology Classroom</h1>
         <nav class="space-y-4 font-medium">
             <a href="#" class="block hover:text-purple-200">📊 Dashboard</a>
-            <a href="{{ route('modules') }}" class="block hover:text-purple-200">📚 Modules</a>
+            <a href="{{ route('modules.index') }}" class="block hover:text-purple-200">📚 Modules</a>
             <a href="{{ route('community') }}" class="block hover:text-purple-200">🤝 Community</a>
             <a href="#" class="block hover:text-purple-200">⚙️ Settings</a>
         </nav>
@@ -40,7 +40,7 @@
         <!-- Dashboard Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <!-- 📚 Modules (clickable) -->
-            <a href="{{ route('modules') }}" class="block h-full">
+            <a href="{{ route('modules.index') }}" class="block h-full">
                 <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-400 to-purple-500 h-full">
                     <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition h-full min-h-[160px] flex flex-col justify-center">
                         <h2 class="text-2xl font-semibold text-purple-700 mb-2">📚 Modules</h2>
