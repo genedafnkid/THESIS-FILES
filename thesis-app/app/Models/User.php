@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Post; // Make sure to import this if not already
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -18,7 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'email',
         'password',
     ];
@@ -41,4 +44,27 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the posts written by the user.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = Str::random(10);
+            }
+        });
+    }
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
 }
