@@ -4,7 +4,7 @@
         <div class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 p-1 rounded-2xl shadow-2xl max-w-md w-full">
             <!-- Inner White Card -->
             <div class="bg-white rounded-xl p-8">
-                
+
                 <!-- Stylish Header -->
                 <div class="text-center mb-8">
                     <p class="text-sm text-gray-500 tracking-wide uppercase mb-1">
@@ -18,23 +18,49 @@
                     </p>
                 </div>
 
+                {{-- Global error list (shows 422s etc.) --}}
+                @if ($errors->any())
+                    <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+                        <ul class="list-disc pl-5">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-                    <!-- Name -->
+                    <!-- First Name -->
                     <div class="mb-5">
-                        <x-input-label for="name" :value="__('Name')" class="text-sm font-medium text-indigo-600" />
+                        <x-input-label for="firstName" :value="__('First Name')" class="text-sm font-medium text-indigo-600" />
                         <x-text-input
-                            id="name"
+                            id="firstName"
                             class="mt-1 w-full px-4 py-2 rounded-lg border-2 border-indigo-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             type="text"
-                            name="name"
-                            :value="old('name')"
+                            name="firstName"
+                            :value="old('firstName')"
                             required
                             autofocus
-                            autocomplete="name"
+                            autocomplete="given-name"
                         />
-                        <x-input-error :messages="$errors->get('name')" class="mt-2 text-sm text-red-600" />
+                        <x-input-error :messages="$errors->get('firstName')" class="mt-2 text-sm text-red-600" />
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="mb-5">
+                        <x-input-label for="lastName" :value="__('Last Name')" class="text-sm font-medium text-indigo-600" />
+                        <x-text-input
+                            id="lastName"
+                            class="mt-1 w-full px-4 py-2 rounded-lg border-2 border-indigo-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            type="text"
+                            name="lastName"
+                            :value="old('lastName')"
+                            required
+                            autocomplete="family-name"
+                        />
+                        <x-input-error :messages="$errors->get('lastName')" class="mt-2 text-sm text-red-600" />
                     </div>
 
                     <!-- Email Address -->
@@ -86,7 +112,9 @@
                             {{ __('Already registered?') }}
                         </a>
 
-                        <x-primary-button class="ml-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-400 transition-all duration-200 rounded-full px-6 py-2 text-white font-semibold shadow-md">
+                        <x-primary-button
+                            type="submit" {{-- ensure it submits --}}
+                            class="ml-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-400 transition-all duration-200 rounded-full px-6 py-2 text-white font-semibold shadow-md">
                             {{ __('Register') }}
                         </x-primary-button>
                     </div>
