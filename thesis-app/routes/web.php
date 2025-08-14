@@ -9,7 +9,7 @@ use App\Models\Score;
 
 // Public Route
 Route::get('/', function () {
-    return view('welcome');
+    return view('/dashboard');
 });
 
 // Authenticated Dashboard
