@@ -6,23 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
+        if (!Schema::hasTable('modules')) return;
+
         Schema::table('modules', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            if (!Schema::hasColumn('modules', 'user_id')) {
+                $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            }
         });
     }
 
-    public function down()
+    public function down(): void
     {
+        if (!Schema::hasTable('modules')) return;
+
         Schema::table('modules', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+            if (Schema::hasColumn('modules', 'user_id')) {
+                try { $table->dropForeign('modules_user_id_foreign'); }
+                catch (\Throwable $e) { try { $table->dropForeign(['user_id']); } catch (\Throwable $e2) {} }
+
+                $table->dropColumn('user_id');
+            }
         });
     }
-
 };

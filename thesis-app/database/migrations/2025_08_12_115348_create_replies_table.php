@@ -4,33 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
+        if (!Schema::hasTable('replies')) return;
+
         Schema::table('replies', function (Blueprint $table) {
-            // Drop old foreign key if it exists
-            $table->dropForeign(['post_id']);
-            $table->dropForeign(['user_id']);
+            // Best-effort drops to avoid crashing if FKs aren't present yet
+            try { $table->dropForeign(['post_id']); } catch (\Throwable $e) {}
+            try { $table->dropForeign(['user_id']); } catch (\Throwable $e) {}
 
-            // Recreate with cascade
-            $table->foreign('post_id')
-                  ->references('id')->on('posts')
-                  ->onDelete('cascade');
-
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete();
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 
     public function down()
     {
-        Schema::table('replies', function (Blueprint $table) {
-            $table->dropForeign(['post_id']);
-            $table->dropForeign(['user_id']);
+        if (!Schema::hasTable('replies')) return;
 
-            // Rollback to normal (restrict delete)
+        Schema::table('replies', function (Blueprint $table) {
+            try { $table->dropForeign(['post_id']); } catch (\Throwable $e) {}
+            try { $table->dropForeign(['user_id']); } catch (\Throwable $e) {}
+
             $table->foreign('post_id')->references('id')->on('posts');
             $table->foreign('user_id')->references('id')->on('users');
         });

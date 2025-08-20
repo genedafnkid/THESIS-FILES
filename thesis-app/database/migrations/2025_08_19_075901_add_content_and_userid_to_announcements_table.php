@@ -6,25 +6,32 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
+        if (!Schema::hasTable('announcements')) return;
+
         Schema::table('announcements', function (Blueprint $table) {
-            $table->text('content')->after('id');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade')->after('content');
+            if (!Schema::hasColumn('announcements', 'user_id')) {
+                $table->foreignId('user_id')
+                      ->nullable()
+                      ->constrained('users')
+                      ->cascadeOnDelete();
+            }
         });
     }
 
-    public function down()
+    public function down(): void
     {
+        if (!Schema::hasTable('announcements')) return;
+
         Schema::table('announcements', function (Blueprint $table) {
-            $table->dropColumn('content');
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
+            if (Schema::hasColumn('announcements', 'user_id')) {
+                // drop FK first, then column
+                try { $table->dropForeign('announcements_user_id_foreign'); }
+                catch (\Throwable $e) { try { $table->dropForeign(['user_id']); } catch (\Throwable $e2) {} }
+
+                $table->dropColumn('user_id');
+            }
         });
     }
 };

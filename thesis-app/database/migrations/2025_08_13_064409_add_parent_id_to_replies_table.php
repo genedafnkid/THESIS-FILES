@@ -6,25 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up(): void
     {
+        if (!Schema::hasTable('replies')) return;
+
         Schema::table('replies', function (Blueprint $table) {
-            $table->unsignedBigInteger('parent_id')->nullable()->after('post_id');
-            $table->foreign('parent_id')->references('id')->on('replies')->onDelete('cascade');
+            // id() uses BIGINT UNSIGNED, so match that with foreignId()
+            $table->foreignId('parent_id')
+                  ->nullable()
+                  ->after('post_id')
+                  ->constrained('replies')
+                  ->cascadeOnDelete();
         });
     }
 
     public function down(): void
     {
+        if (!Schema::hasTable('replies')) return;
+
         Schema::table('replies', function (Blueprint $table) {
-            $table->dropForeign(['parent_id']);
+            // Drop FK by its auto-generated name to be explicit
+            // 'replies_parent_id_foreign' is the default name
+            $table->dropForeign('replies_parent_id_foreign');
             $table->dropColumn('parent_id');
         });
     }
-
 };

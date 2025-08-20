@@ -6,22 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
+        if (!Schema::hasTable('announcements')) return;
+
         Schema::table('announcements', function (Blueprint $table) {
-            $table->text('content')->nullable()->after('id');
+            // Use longText if you expect long/HTML content
+            if (!Schema::hasColumn('announcements', 'content')) {
+                $table->longText('content')->nullable()->after('id');
+            }
         });
     }
 
-    public function down()
+    public function down(): void
     {
+        if (!Schema::hasTable('announcements')) return;
+
         Schema::table('announcements', function (Blueprint $table) {
-            $table->dropColumn('content');
+            if (Schema::hasColumn('announcements', 'content')) {
+                $table->dropColumn('content');
+            }
         });
     }
 };
+
