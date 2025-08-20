@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Module;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ModuleController extends Controller
 {
@@ -12,7 +14,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::all();
+        // Get all modules with user relationship
+        $modules = Module::with('user')->latest()->get();
         return view('modules', compact('modules'));
     }
 
@@ -29,29 +32,39 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the request
+        // ✅ Validate input
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title'       => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'file'        => 'nullable|file|mimes:jpg,jpeg,png,gif,webp,pdf,doc,docx,ppt,pptx,xls,xlsx,txt|max:10240',
         ]);
 
-        // Create the module
-        Module::create([
-            'title' => $request->title,
+        $filePath = null;
+
+        if ($request->hasFile('file')) {
+            // Store file inside storage/app/public/modules
+            $filePath = $request->file('file')->store('modules', 'public');
+        }
+
+        // ✅ Create module
+        $module = Module::create([
+            'title'       => $request->title,
             'description' => $request->description,
+            'file_path'   => $filePath,
         ]);
 
         return redirect()
             ->route('modules.index')
-            ->with('success', 'Module created successfully.');
+            ->with('success', 'Module created successfully!');
     }
+
 
     /**
      * Display the specified module.
      */
     public function show($id)
     {
-        $module = Module::findOrFail($id);
+        $module = Module::with('user')->findOrFail($id);
         return view('modules.show', compact('module'));
     }
 
@@ -69,21 +82,34 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $module = Module::findOrFail($id);
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'file' => 'nullable|mimes:pdf,docx,pptx,jpg,jpeg,png|max:10240', // 10MB
         ]);
 
-        $module = Module::findOrFail($id);
-        $module->update([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        $module->title = $request->input('title');
+        $module->description = $request->input('description');
 
-        return redirect()
-            ->route('modules.index')
-            ->with('success', 'Module updated successfully.');
+        // ✅ Handle file replacement
+        if ($request->hasFile('file')) {
+            // Delete old file if exists
+            if ($module->file_path && Storage::disk('public')->exists($module->file_path)) {
+                Storage::disk('public')->delete($module->file_path);
+            }
+
+            // Store new file
+            $path = $request->file('file')->store('modules', 'public');
+            $module->file_path = $path;
+        }
+
+        $module->save();
+
+        return redirect()->route('modules.index')->with('success', 'Module updated successfully.');
     }
+
 
     /**
      * Remove the specified module from storage.
@@ -91,10 +117,16 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         $module = Module::findOrFail($id);
+
+        // delete file from storage if exists
+        if ($module->file_path && Storage::disk('public')->exists($module->file_path)) {
+            Storage::disk('public')->delete($module->file_path);
+        }
+
         $module->delete();
 
-        return redirect()
-            ->route('modules.index')
-            ->with('success', 'Module deleted successfully.');
+        return redirect()->route('modules.index')->with('success', 'Module deleted successfully.');
     }
+
+
 }

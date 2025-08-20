@@ -11,20 +11,20 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('replies', function (Blueprint $table) {
-            $table->unsignedBigInteger('post_id')->after('id');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->unsignedBigInteger('parent_id')->nullable()->after('post_id');
+            $table->foreign('parent_id')->references('id')->on('replies')->onDelete('cascade');
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::table('replies', function (Blueprint $table) {
-            $table->dropForeign(['post_id']);
-            $table->dropColumn('post_id');
+            $table->dropForeign(['parent_id']);
+            $table->dropColumn('parent_id');
         });
     }
-    
+
 };

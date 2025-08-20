@@ -14,15 +14,19 @@ return new class extends Migration
     public function up()
     {
         Schema::table('replies', function (Blueprint $table) {
-            $table->text('content')->after('user_id');
+            //
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::table('replies', function (Blueprint $table) {
-            $table->dropColumn('content');
+            //
         });
     }
-    
 };

@@ -87,12 +87,56 @@
         <div class="p-[2px] rounded-xl bg-gradient-to-r from-pink-500 to-purple-600">
             <div class="bg-white p-6 rounded-xl shadow-md">
                 <h3 class="text-xl font-bold text-purple-700 mb-4">📢 Recent Announcements</h3>
+
+                {{-- List of announcements --}}
                 <ul class="space-y-2">
-                    <li class="bg-gray-50 p-4 rounded shadow text-gray-700">🗓️ Quiz on “Biblical Covenants” is due Friday.</li>
-                    <li class="bg-gray-50 p-4 rounded shadow text-gray-700">🙏 Virtual Prayer Night on Wednesday @ 7 PM.</li>
+                    @forelse($announcements as $announcement)
+                        <li class="bg-gray-50 p-4 rounded shadow text-gray-700">
+                            {{ $announcement->content }}
+                            <span class="block text-sm text-gray-500">
+                                📅 {{ $announcement->created_at->format('M d, Y') }}
+                            </span>
+
+                            {{-- Only Admin & Instructor can edit/delete --}}
+                            @role('admin|instructor')
+                                <div class="mt-2 flex space-x-2">
+                                    <a href="{{ route('announcements.edit', $announcement->id) }}" 
+                                    class="text-blue-600 hover:underline">✏️ Edit</a>
+
+                                    <form action="{{ route('announcements.destroy', $announcement->id) }}" 
+                                        method="POST" 
+                                        onsubmit="return confirm('Delete this announcement?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" 
+                                                class="text-red-600 hover:underline">🗑️ Delete</button>
+                                    </form>
+                                </div>
+                            @endrole
+                        </li>
+                    @empty
+                        <li class="text-gray-500">No announcements yet.</li>
+                    @endforelse
                 </ul>
+
+                {{-- Only Admin & Instructor can create --}}
+                @role('admin|instructor')
+                    <div class="mt-4">
+                        <form action="{{ route('announcements.store') }}" method="POST">
+                            @csrf
+                            <textarea name="content" rows="3" 
+                                    class="w-full p-2 border rounded-lg focus:ring focus:ring-purple-300" 
+                                    placeholder="Write a new announcement..."></textarea>
+                            <button type="submit" 
+                                    class="mt-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
+                                ➕ Post Announcement
+                            </button>
+                        </form>
+                    </div>
+                @endrole
             </div>
         </div>
+
     </main>
 </div>
 @endsection
