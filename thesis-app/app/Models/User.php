@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles; // Role & Permission management
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
         'email',
         'password',
     ];
@@ -58,4 +60,23 @@ class User extends Authenticatable
         return $this->hasMany(Reply::class);
     }
     
+    public function getNameAttribute()
+{
+    return "{$this->firstname} {$this->lastname}";
+}
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = Str::random(10);
+            }
+        });
+    }
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
 }

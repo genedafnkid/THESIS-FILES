@@ -35,7 +35,7 @@ class CommunityController extends Controller
         ]);
 
         auth()->user()->posts()->create([
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
 
         return redirect()->route('community')->with('success', 'Post created successfully!');
@@ -58,7 +58,7 @@ class CommunityController extends Controller
         Reply::create([
             'post_id'   => $post->id,
             'user_id'   => auth()->id(),
-            'content'   => $request->content,
+            'content'   => $request->input('content'),
         ]);
 
         return redirect()->route('community')->with('success', 'Reply posted successfully!');
@@ -76,7 +76,7 @@ class CommunityController extends Controller
         ]);
 
         $post->update([
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
 
         return redirect()->route('community')->with('success', 'Post updated successfully!');
@@ -116,7 +116,7 @@ class CommunityController extends Controller
         ]);
 
         $reply->update([
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
 
         return redirect()->route('community')->with('success', 'Reply updated successfully!');

@@ -20,7 +20,7 @@ class AnnouncementController extends Controller
         ]);
 
         Announcement::create([
-            'content' => $request->content,
+            'content' => $request->input('content'),
             'user_id' => auth()->id(),
         ]);
 
@@ -39,7 +39,7 @@ class AnnouncementController extends Controller
         ]);
 
         $announcement->update([
-            'content' => $request->content,
+            'content' => $request->input('content'),
         ]);
 
         return redirect()->route('community.index')->with('success', 'Announcement updated.');

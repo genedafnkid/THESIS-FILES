@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -7,28 +6,22 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        if (!Schema::hasTable('replies')) return;
-
-        Schema::table('replies', function (Blueprint $table) {
-            // Best-effort drops to avoid crashing if FKs aren't present yet
-            try { $table->dropForeign(['post_id']); } catch (\Throwable $e) {}
-            try { $table->dropForeign(['user_id']); } catch (\Throwable $e) {}
+        Schema::create('replies', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('post_id');
+            $table->string('user_id', 10); // match users.id
+            $table->text('content');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('parent_id')->references('id')->on('replies')->nullOnDelete();
         });
     }
 
     public function down()
     {
-        if (!Schema::hasTable('replies')) return;
-
-        Schema::table('replies', function (Blueprint $table) {
-            try { $table->dropForeign(['post_id']); } catch (\Throwable $e) {}
-            try { $table->dropForeign(['user_id']); } catch (\Throwable $e) {}
-
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('user_id')->references('id')->on('users');
-        });
+        Schema::dropIfExists('replies');
     }
 };
