@@ -1,52 +1,63 @@
-<x-guest-layout>
-    <div class="flex items-center justify-center bg-gray-100 py-12 px-4">
-        <!-- Gradient Border Wrapper -->
-        <div class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 p-1 rounded-2xl shadow-2xl max-w-md w-full">
-            <!-- Inner White Card -->
-            <div class="bg-white rounded-xl p-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Forgot Password</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-100 via-white to-slate-100">
+  <div class="flex min-h-screen items-center justify-center p-6">
+    <div class="w-full max-w-md">
+      <div class="mb-6 text-center">
+        <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-slate-700 hover:text-slate-900">
+          <span class="inline-block h-10 w-10 rounded-xl bg-slate-800"></span>
+          <span class="text-xl font-semibold">Digital Theology Classroom</span>
+        </a>
+        <h1 class="mt-4 text-2xl font-bold text-slate-900">Forgot your password?</h1>
+        <p class="mt-1 text-sm text-slate-600">
+          Enter your email and we’ll send you a reset link.
+        </p>
+      </div>
 
-                <!-- Stylish Header -->
-                <div class="text-center mb-6">
-                    <p class="text-sm text-gray-500 tracking-wide uppercase mb-1">
-                        Trouble Signing In?
-                    </p>
-                    <h2 class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 drop-shadow">
-                        Reset Your Password
-                    </h2>
-                    <p class="text-sm text-gray-500 mt-2 leading-relaxed">
-                        Forgot your password? No problem. Just enter your email address and we’ll send you a reset link.
-                    </p>
-                </div>
-
-                <!-- Session Status -->
-                <x-auth-session-status class="mb-4 text-sm text-green-600" :status="session('status')" />
-
-                <form method="POST" action="{{ route('password.email') }}">
-                    @csrf
-
-                    <!-- Email Address -->
-                    <div class="mb-6">
-                        <x-input-label for="email" :value="__('Email')" class="text-sm font-medium text-indigo-600" />
-                        <x-text-input
-                            id="email"
-                            class="mt-1 w-full px-4 py-2 rounded-lg border-2 border-indigo-200 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                            type="email"
-                            name="email"
-                            :value="old('email')"
-                            required
-                            autofocus
-                        />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2 text-sm text-red-600" />
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="flex items-center justify-end">
-                        <x-primary-button class="bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-400 transition-all duration-200 rounded-full px-6 py-2 text-white font-semibold shadow-md">
-                            {{ __('Email Password Reset Link') }}
-                        </x-primary-button>
-                    </div>
-                </form>
-            </div>
+      @if (session('status'))
+        <div class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-800">
+          {{ session('status') }}
         </div>
+      @endif
+
+      @if ($errors->any())
+        <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+          <ul class="list-inside list-disc">
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+
+      <form method="POST" action="{{ route('password.email') }}" class="space-y-4">
+        @csrf
+        <div>
+          <label for="email" class="mb-1 block text-sm font-medium text-slate-700">Email</label>
+          <input id="email" name="email" type="email" value="{{ old('email') }}" required autofocus
+                 class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 placeholder-slate-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200" />
+          @error('email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+        </div>
+
+        <button type="submit"
+                class="inline-flex w-full items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">
+          Email Password Reset Link
+        </button>
+
+        <div class="flex items-center justify-between text-sm">
+          <a href="{{ route('login') }}" class="font-medium text-slate-600 hover:underline">Back to login</a>
+          <a href="{{ route('register') }}" class="font-medium text-slate-600 hover:underline">Create account</a>
+        </div>
+      </form>
+
+      <p class="mt-8 text-center text-xs text-slate-500">© {{ date('Y') }} Digital Theology Classroom</p>
     </div>
-</x-guest-layout>
+  </div>
+</body>
+</html>

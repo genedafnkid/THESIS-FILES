@@ -59,11 +59,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reply::class);
     }
-    
+
     public function getNameAttribute()
-{
-    return "{$this->firstname} {$this->lastname}";
-}
+    {
+        return ucfirst($this->firstName) . ' ' . ucfirst($this->lastName);
+    }
+
 
     protected static function boot()
     {

@@ -4,25 +4,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up(): void
     {
-        if (!Schema::hasTable('replies')) return;
+        if (!Schema::hasTable('replies') || Schema::hasColumn('replies', 'parent_id'))
+            return;
 
         Schema::table('replies', function (Blueprint $table) {
-            // id() uses BIGINT UNSIGNED, so match that with foreignId()
             $table->foreignId('parent_id')
-                  ->nullable()
-                  ->after('post_id')
-                  ->constrained('replies')
-                  ->cascadeOnDelete();
+                ->nullable()
+                ->after('post_id')
+                ->constrained('replies')
+                ->cascadeOnDelete();
         });
     }
 
+
     public function down(): void
     {
-        if (!Schema::hasTable('replies')) return;
+        if (!Schema::hasTable('replies'))
+            return;
 
         Schema::table('replies', function (Blueprint $table) {
             // Drop FK by its auto-generated name to be explicit

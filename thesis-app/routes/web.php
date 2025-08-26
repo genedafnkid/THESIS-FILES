@@ -17,7 +17,7 @@ use App\Models\Score;
 
 // Public Route
 Route::get('/', function () {
-    return view ('welcome');
+    return view('welcome');
 });
 
 // 🔐 Authenticated Dashboard
@@ -31,14 +31,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 //score saving
-Route::middleware(['web','auth'])->post('/scores', [ScoreController::class, 'store']);
+Route::middleware(['web', 'auth'])->post('/scores', [ScoreController::class, 'store']);
 //play games
-Route::middleware(['auth'])->get('/play1', function () {
-    return view('play1');
-});
-Route::middleware(['auth'])->get('/play2', function () {
-    return view('play2');
-});
+
 
 Route::middleware(['auth'])->get('/user', function (Request $request) {
     return response()->json(['id' => $request->user()->id]);
@@ -88,9 +83,23 @@ Route::middleware('auth')->group(function () {
 
     // 🛠 Admin-only routes
     Route::middleware(['role:admin'])->group(function () {
-        Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
+        // Tabs
+        Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');                 // pending
+        Route::get('/admin/users/approved', [AdminController::class, 'approved'])->name('admin.users.approved'); // approved
+
+        // Actions
         Route::post('/admin/approve-user/{id}/{role}', [AdminController::class, 'approveUser'])->name('admin.approveUser');
+        Route::patch('/admin/deny-user/{id}', [AdminController::class, 'denyUser'])->name('admin.denyUser');
+
+        // (optional) revoke back to pending
+        Route::patch('/admin/revoke-user/{id}', [AdminController::class, 'revokeUser'])->name('admin.revokeUser');
+
+        // (optional) change role for an approved user
+        Route::post('/admin/change-role/{id}/{role}', [AdminController::class, 'changeRole'])->name('admin.changeRole');
     });
+
+
+
 
     // 📘 Replies
     Route::get('/replies/{reply}/edit', [CommunityController::class, 'editReply'])->name('replies.edit');
@@ -100,7 +109,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('announcements', AnnouncementController::class);
 
     Route::middleware(['role:instructor'])->group(function () {
-    Route::get('/instructor/dashboard', [InstructorController::class, 'index']);
+        Route::get('/instructor/dashboard', [InstructorController::class, 'index']);
     });
 
     Route::middleware(['role:student'])->group(function () {
@@ -110,7 +119,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('modules', ModuleController::class);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    // routes/web.php
+    Route::get('/play{game}', function ($game) {
+        return view('play', data: ['gameNumber' => (int) $game]);
+    })->whereNumber(parameters: 'game');
+    
+    Route::get('/play{game}', function ($game) {
+        return view('play' . (int) $game);
+    })->where('game', '[0-9]+');
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

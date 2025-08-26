@@ -199,4 +199,8 @@ return [
 
         'store' => 'default',
     ],
+
+    'model_has_roles' => [
+        'model_morph_key_type' => 'string', // <-- ADD THIS LINE
+    ],
 ];

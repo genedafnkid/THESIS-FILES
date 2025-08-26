@@ -15,8 +15,9 @@ return new class extends Migration {
             $table->foreign('user_id')
                 ->references('id')->on('users')
                 ->nullOnDelete(); // or ->onDelete('set null')
+            $table->unsignedInteger('game_number')->index(); // e.g., 1 = play1, 2 = play2, etc.
 
-            // your other columns...
+            $table->float('meter_score')->nullable();
             $table->integer('score')->default(0);
             $table->string('mode')->nullable();
 
