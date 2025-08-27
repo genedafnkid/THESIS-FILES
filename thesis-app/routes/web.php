@@ -25,6 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
 
 // Authenticated Dashboard
 Route::get('/dashboard', function () {
@@ -100,9 +101,6 @@ Route::middleware('auth')->group(function () {
         // (optional) change role for an approved user
         Route::post('/admin/change-role/{id}/{role}', [AdminController::class, 'changeRole'])->name('admin.changeRole');
     });
-
-    Route::get('/{any}', fn() => view('play1'))
-        ->where('any', '^(?!api).*$'); // exclude /api/*
 
 
 
