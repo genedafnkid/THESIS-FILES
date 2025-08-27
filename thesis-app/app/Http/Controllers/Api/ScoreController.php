@@ -9,22 +9,28 @@ use Illuminate\Http\Request;
 class ScoreController extends Controller
 {
     // POST /api/scores
-    public function store(Request $req, int $game)
+    public function store(Request $req)
     {
+        \Log::info('🔥 HIT /api/scores', ['payload' => $req->all(), 'headers' => $req->headers->all()]);
+
         $data = $req->validate([
             'score' => 'required|integer',
+            'meter_score' => 'nullable|numeric',
+            'game_number' => 'required|integer',
+            'user_id' => 'nullable|exists:users,id',
         ]);
 
-        $score = Score::create(attributes: [
-            'user_id' => auth()->id(), // null if not logged in
+        $score = Score::create([
+            'user_id' => $data['user_id'] ?? null,
             'score' => $data['score'],
-            'game_number' => $game,
+            'game_number' => $data['game_number'],
             'meter_score' => $data['meter_score'] ?? null,
-
-
         ]);
 
-        return response()->json(['status' => 'ok', 'id' => $score->id]);
+        return response()->json([
+            'status' => 'ok',
+            'saved' => $score,
+        ]);
     }
 
     // GET /api/scores/latest
