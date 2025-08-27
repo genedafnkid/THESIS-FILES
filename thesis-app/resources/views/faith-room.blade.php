@@ -65,10 +65,6 @@
         <h1 class="text-3xl md:text-4xl font-extrabold text-purple-700">🕊️ Virtual Faith Room</h1>
         <p class="text-gray-600 mt-1">Gamified activities designed to nurture spiritual formation.</p>
         <div class="mt-6">
-          <a href="{{ route('faith-room') }}"
-             class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-white font-semibold hover:bg-indigo-700">
-            Enter 2D Classroom
-          </a>
         </div>
       </div>
     </div>

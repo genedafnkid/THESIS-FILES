@@ -39,16 +39,19 @@ Route::middleware(['auth'])->get('/user', function (Request $request) {
     return response()->json(['id' => $request->user()->id]);
 });
 
-
 Route::post('/scores', function (Request $request) {
     $request->validate([
         'score' => 'required|integer',
         'user_id' => 'required|exists:users,id',
+        'game_number' => 'required|integer',
+        'meter_score' => 'nullable|numeric',
     ]);
 
     $score = Score::create([
         'score' => $request->score,
         'user_id' => $request->user_id,
+        'game_number' => $request->game_number,
+        'meter_score' => $request->meter_score,
     ]);
 
     return response()->json([
@@ -98,6 +101,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/admin/change-role/{id}/{role}', [AdminController::class, 'changeRole'])->name('admin.changeRole');
     });
 
+    Route::get('/{any}', fn() => view('play1'))
+        ->where('any', '^(?!api).*$'); // exclude /api/*
 
 
 
@@ -121,12 +126,15 @@ Route::middleware('auth')->group(function () {
 
     // routes/web.php
     Route::get('/play{game}', function ($game) {
-        return view('play', data: ['gameNumber' => (int) $game]);
-    })->whereNumber(parameters: 'game');
-    
-    Route::get('/play{game}', function ($game) {
-        return view('play' . (int) $game);
-    })->where('game', '[0-9]+');
+        $view = 'play' . (int) $game;
+
+        if (!view()->exists($view)) {
+            abort(404, "Game view not found.");
+        }
+
+        return view($view, ['gameNumber' => (int) $game]);
+    })->whereNumber('game');
+
 
 });
 

@@ -13,7 +13,7 @@ return new class extends Migration {
             // Match users.id (VARCHAR(10))
             $table->string('user_id', 10)->nullable()->index();
             $table->foreign('user_id')
-                ->references('id')->on('users')
+                ->references(columns: 'id')->on('users')
                 ->nullOnDelete(); // or ->onDelete('set null')
             $table->unsignedInteger('game_number')->index(); // e.g., 1 = play1, 2 = play2, etc.
 
