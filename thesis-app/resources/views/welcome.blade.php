@@ -128,10 +128,10 @@
         <div class="relative">
           <div class="absolute -inset-6 -z-10 rounded-3xl bg-gradient-to-tr from-brand-200/60 to-indigo-200/60 blur-2xl"></div>
           <div class="grid grid-cols-2 gap-4">
-            <img class="rounded-3xl shadow-xl object-cover h-56 w-full" src="https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?q=80&w=1200&auto=format&fit=crop" alt="Open Bible on a desk" />
-            <img class="rounded-3xl shadow-xl object-cover h-72 w-full" src="https://images.unsplash.com/photo-1463592177119-bab2a00f3ccb?q=80&w=1200&auto=format&fit=crop" alt="Students discussing with laptops" />
-            <img class="rounded-3xl shadow-xl object-cover h-72 w-full" src="https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?q=80&w=1200&auto=format&fit=crop" alt="Prayer hands in soft light" />
-            <img class="rounded-3xl shadow-xl object-cover h-56 w-full" src="https://images.unsplash.com/photo-1515165562835-c3b8c8f10187?q=80&w=1200&auto=format&fit=crop" alt="Notebook, pen, and coffee for study" />
+            <img class="rounded-3xl shadow-xl object-cover h-56 w-full" src="{{ asset('images/first.jpg') }}" alt="Open Bible on a desk" />
+            <img class="rounded-3xl shadow-xl object-cover h-72 w-full" src="{{ asset('images/second.jpg')}}" alt="Students discussing with laptops" />
+            <img class="rounded-3xl shadow-xl object-cover h-72 w-full" src="{{ asset('images/third.jpg') }}" alt="Prayer hands in soft light" />
+            <img class="rounded-3xl shadow-xl object-cover h-56 w-full" src="{{ asset('images/fourth.jpg') }}" alt="Notebook, pen, and coffee for study" />
           </div>
         </div>
       </div>
@@ -256,7 +256,7 @@
           </div>
         </div>
         <div class="relative">
-          <img class="rounded-3xl shadow-2xl object-cover w-full h-[480px]" src="https://images.unsplash.com/photo-1529336953121-ad1a6d393c5a?q=80&w=1600&auto=format&fit=crop" alt="Students in a small group with Bibles and notebooks" />
+          <img class="rounded-3xl shadow-2xl object-cover w-full h-[480px]" src="{{ asset('images/study.jpg') }}" alt="Students in a small group with Bibles and notebooks" />
           <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl border p-4 w-[260px]">
             <p class="text-xs text-gray-500">Today’s Reflection</p>
             <p class="mt-1 text-sm">“Blessed are the peacemakers…” —
@@ -283,12 +283,12 @@
         <a href="{{ route('modules.index') }}" class="hidden sm:inline-flex px-4 py-2 rounded-xl bg-gray-900 text-white">Explore modules</a>
       </div>
       <div class="mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-        <img class="aspect-[4/5] object-cover rounded-xl" src="https://images.unsplash.com/photo-1454991727061-be514eae86f7?q=80&w=1200&auto=format&fit=crop" alt="Candle and Bible"/>
-        <img class="aspect-square object-cover rounded-xl" src="https://images.unsplash.com/photo-1485322551133-3a4c27a9d925?q=80&w=1200&auto=format&fit=crop" alt="Laptop and coffee for study"/>
-        <img class="aspect-[4/5] object-cover rounded-xl" src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=1200&auto=format&fit=crop" alt="Quiet church interior"/>
-        <img class="aspect-square object-cover rounded-xl" src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="Group discussion"/>
-        <img class="aspect-[4/5] object-cover rounded-xl" src="https://images.unsplash.com/photo-1504051771394-dd2e66b2e08f?q=80&w=1200&auto=format&fit=crop" alt="Forest path for retreat"/>
-        <img class="aspect-square object-cover rounded-xl" src="https://images.unsplash.com/photo-1520975673311-1f16a6c41d52?q=80&w=1200&auto=format&fit=crop" alt="Hands in prayer"/>
+        <img class="aspect-[4/5] object-cover rounded-xl" src="{{ asset('images/fifth.jpg') }}" alt="Candle and Bible"/>
+        <img class="aspect-square object-cover rounded-xl" src="{{ asset('images/sixth.jpg') }}" alt="Laptop and coffee for study"/>
+        <img class="aspect-[4/5] object-cover rounded-xl" src="{{ asset('images/seventh.jpg') }}" alt="Quiet church interior"/>
+        <img class="aspect-square object-cover rounded-xl" src="{{ asset('images/eighth.jpg') }}" alt="Group discussion"/>
+        <img class="aspect-[4/5] object-cover rounded-xl" src="{{ asset('images/ninth.jpg') }}" alt="Forest path for retreat"/>
+        <img class="aspect-square object-cover rounded-xl" src="{{ asset('images/tenth.jpg') }}" alt="Hands in prayer"/>
       </div>
     </div>
   </section>
