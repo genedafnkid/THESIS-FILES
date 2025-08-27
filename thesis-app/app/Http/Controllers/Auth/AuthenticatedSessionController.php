@@ -25,12 +25,21 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->authenticate(); // 🔐 Authenticates the user
+
+        // ✅ Add status check right here
+        if (auth()->user()->status !== 'approved') {
+            auth()->logout();
+            return redirect('/login')->withErrors([
+                'email' => 'Your account is pending approval by an admin.',
+            ]);
+        }
 
         $request->session()->regenerate();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+
 
     /**
      * Destroy an authenticated session.
@@ -45,4 +54,6 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+
 }

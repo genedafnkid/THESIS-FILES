@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Post; // Make sure to import this if not already
+use Spatie\Permission\Traits\HasRoles; // Role & Permission management
+use App\Models\Post;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -46,16 +46,25 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the posts written by the user.
+     * Get all posts created by the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
+    }
+
     public function getNameAttribute()
-{
-    return "{$this->firstname} {$this->lastname}";
-}
+    {
+        return ucfirst($this->firstName) . ' ' . ucfirst($this->lastName);
+    }
+
 
     protected static function boot()
     {

@@ -18,8 +18,9 @@ use App\Http\Controllers\Api\ScoreController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/games/{game}/scores', [ScoreController::class, 'store'])->whereNumber('game');
 
-Route::post('/scores', [ScoreController::class, 'store']);
+Route::post('/scores', action: [ScoreController::class, 'store']);
 Route::get('/scores/latest', [ScoreController::class, 'latest']);
 Route::get('/scores/leaderboard', [ScoreController::class, 'leaderboard']);
 
