@@ -40,6 +40,7 @@
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
         <a href="{{ route('modules.index') }}" class="hover:text-brand-700">Modules</a>
         <a href="{{ route('community') }}" class="hover:text-brand-700">Community</a>
+        <a href="{{ route('profile.edit') }}" class="text-brand-700 font-semibold">Settings</a>
         <a href="{{ route('admin.users') }}" class="text-brand-700">Admin</a>
       </nav>
       <div class="flex items-center gap-2">
