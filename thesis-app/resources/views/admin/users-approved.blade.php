@@ -34,7 +34,9 @@
   <header class="sticky top-0 z-30 bg-white/70 backdrop-blur border-b border-white/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="{{ url('/') }}" class="flex items-center gap-2">
-        <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-400 to-indigo-600 text-white font-black">D</span>
+        <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" 
+        alt="Logo" 
+        class="h-11 w-13 rounded-xl object-cover">
         <span class="font-extrabold tracking-tight text-lg sm:text-xl">Digital Theology Classroom</span>
       </a>
       <nav class="hidden md:flex items-center gap-6 text-sm font-medium">

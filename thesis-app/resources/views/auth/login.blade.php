@@ -202,22 +202,6 @@
                             </div>
                         @endif
                     </form>
-
-                    <!-- Divider -->
-                    <div class="my-6 flex items-center gap-3 text-xs text-gray-400">
-                        <div class="h-px flex-1 bg-gray-200"></div>
-                        <span>or</span>
-                        <div class="h-px flex-1 bg-gray-200"></div>
-                    </div>
-
-                    <!-- Social (optional) -->
-                    <div class="grid grid-cols-1 gap-3">
-                        <a href="#"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm hover:border-brand-400/60">
-                            <img alt="" class="h-5 w-5" src="https://www.svgrepo.com/show/475656/google-color.svg" />
-                            Continue with Google
-                        </a>
-                    </div>
                 </div>
 
                 <p class="mt-6 text-center text-xs text-gray-500">By continuing, you agree to our <a
