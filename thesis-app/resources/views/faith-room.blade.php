@@ -44,6 +44,9 @@
         <a href="{{ route('modules.index') }}" class="hover:text-brand-700">Modules</a>
         <a href="{{ route('community') }}" class="hover:text-brand-700">Community</a>
         <a href="{{ route('faith-room') }}" class="text-brand-700">Faith Room</a>
+        @role('admin')
+          <a href="{{ route('admin.users') }}" class="text-brand-700">Admin</a>
+        @endrole
       </nav>
       <div class="flex items-center gap-2">
         <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf</form>
