@@ -13,7 +13,9 @@
       <div class="mb-6 text-center">
         <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-slate-700 hover:text-slate-900">
           <!-- logo placeholder -->
-          <span class="inline-block h-10 w-10 rounded-xl bg-slate-800"></span>
+          <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" 
+        alt="Logo" 
+        class="h-11 w-13 rounded-xl object-cover">
           <span class="text-xl font-semibold">Digital Theology Classroom</span>
         </a>
         <h1 class="mt-4 text-2xl font-bold text-slate-900">Create your account</h1>

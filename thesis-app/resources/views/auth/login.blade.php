@@ -70,8 +70,9 @@
             class="hidden lg:flex lg:w-[45%] xl:w-1/2 p-10 bg-gradient-to-br from-brand-500 to-indigo-700 text-white">
             <div class="max-w-xl my-auto">
                 <a href="/" class="inline-flex items-center gap-3">
-                    <span
-                        class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 font-black">D</span>
+                    <img src="{{ asset('images/WHITE SMALL LOCATOR.png') }}" 
+                    alt="Logo" 
+                    class="h-11 w-13 rounded-xl object-cover">
                     <span class="text-2xl font-extrabold">Digital Theology Classroom</span>
                 </a>
                 <h1 class="mt-10 text-4xl font-black leading-tight">Welcome back.</h1>
