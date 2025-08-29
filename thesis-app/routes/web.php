@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AchievementsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommunityController;
 use Illuminate\Support\Facades\Route;
@@ -120,7 +121,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('modules', ModuleController::class);
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', action: [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/achievements', action: [AchievementsController::class, 'index'])->name('achievements');
 
     // routes/web.php
     Route::get('/play{game}', function ($game) {

@@ -24,6 +24,7 @@ class User extends Authenticatable
         'lastName',
         'email',
         'password',
+        'profile_picture',
     ];
 
     /**
@@ -75,6 +76,14 @@ class User extends Authenticatable
                 $model->{$model->getKeyName()} = Str::random(10);
             }
         });
+    }
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class)->withPivot('earned_at')->withTimestamps();
+    }
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
     }
 
     public $incrementing = false;
