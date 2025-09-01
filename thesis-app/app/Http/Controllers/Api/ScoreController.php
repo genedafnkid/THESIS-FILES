@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Score;
 use Illuminate\Http\Request;
+use App\Services\BadgeService;
 
 class ScoreController extends Controller
 {
@@ -26,6 +27,15 @@ class ScoreController extends Controller
             'game_number' => $data['game_number'],
             'meter_score' => $data['meter_score'] ?? null,
         ]);
+
+        if ($score->user_id) {
+            app(BadgeService::class)->awardModuleBadges(
+                $score->user,            // the User model
+                $score->game_number,     // module id (1,2,3)
+                $score->score,           // quiz score
+                $score->meter_score      // meter score
+            );
+        }
 
         return response()->json([
             'status' => 'ok',

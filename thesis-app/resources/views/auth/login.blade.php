@@ -70,8 +70,9 @@
             class="hidden lg:flex lg:w-[45%] xl:w-1/2 p-10 bg-gradient-to-br from-brand-500 to-indigo-700 text-white">
             <div class="max-w-xl my-auto">
                 <a href="/" class="inline-flex items-center gap-3">
-                    <span
-                        class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/15 font-black">D</span>
+                    <img src="{{ asset('images/WHITE SMALL LOCATOR.png') }}" 
+                    alt="Logo" 
+                    class="h-11 w-13 rounded-xl object-cover">
                     <span class="text-2xl font-extrabold">Digital Theology Classroom</span>
                 </a>
                 <h1 class="mt-10 text-4xl font-black leading-tight">Welcome back.</h1>
@@ -81,20 +82,6 @@
                         and admonishing one another in all wisdom…”</blockquote>
                     <figcaption class="mt-2 text-sm text-white/80">Colossians 3:16</figcaption>
                 </figure>
-                <div class="mt-10 grid grid-cols-3 gap-3 text-center text-sm">
-                    <div class="rounded-xl bg-white/10 p-4">
-                        <div class="text-2xl font-extrabold">12+</div>
-                        <div class="opacity-80">Modules</div>
-                    </div>
-                    <div class="rounded-xl bg-white/10 p-4">
-                        <div class="text-2xl font-extrabold">Weekly</div>
-                        <div class="opacity-80">Mentoring</div>
-                    </div>
-                    <div class="rounded-xl bg-white/10 p-4">
-                        <div class="text-2xl font-extrabold">Live</div>
-                        <div class="opacity-80">Engagement</div>
-                    </div>
-                </div>
             </div>
         </aside>
 
@@ -173,8 +160,6 @@
                                     class="rounded border-gray-300 text-brand-600 focus:ring-brand-500">
                                 <span>Remember me</span>
                             </label>
-                            <a href="{{ route('register') }}" class="text-xs text-gray-500 hover:text-brand-700">Need an
-                                account?</a>
                         </div>
 
                         <!-- Submit -->
@@ -202,22 +187,6 @@
                             </div>
                         @endif
                     </form>
-
-                    <!-- Divider -->
-                    <div class="my-6 flex items-center gap-3 text-xs text-gray-400">
-                        <div class="h-px flex-1 bg-gray-200"></div>
-                        <span>or</span>
-                        <div class="h-px flex-1 bg-gray-200"></div>
-                    </div>
-
-                    <!-- Social (optional) -->
-                    <div class="grid grid-cols-1 gap-3">
-                        <a href="#"
-                            class="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm hover:border-brand-400/60">
-                            <img alt="" class="h-5 w-5" src="https://www.svgrepo.com/show/475656/google-color.svg" />
-                            Continue with Google
-                        </a>
-                    </div>
                 </div>
 
                 <p class="mt-6 text-center text-xs text-gray-500">By continuing, you agree to our <a

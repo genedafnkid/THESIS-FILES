@@ -31,26 +31,8 @@
   </div>
 
   <!-- Top bar -->
-  <header class="sticky top-0 z-30 bg-white/70 backdrop-blur border-b border-white/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="{{ url('/') }}" class="flex items-center gap-2">
-        <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-400 to-indigo-600 text-white font-black">D</span>
-        <span class="font-extrabold tracking-tight text-lg sm:text-xl">Digital Theology Classroom</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="{{ route('modules.index') }}" class="hover:text-brand-700">Modules</a>
-        <a href="{{ route('community') }}" class="hover:text-brand-700">Community</a>
-        <a href="{{ route('admin.users') }}" class="text-brand-700">Admin</a>
-      </nav>
-      <div class="flex items-center gap-2">
-        <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf</form>
-        <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-          class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-indigo-600 px-4 py-2 text-white font-semibold shadow-glow hover:shadow-lg">
-          Logout
-        </button>
-      </div>
-    </div>
-  </header>
+  @include('layouts.navbar')
+
 
   <!-- Main -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
