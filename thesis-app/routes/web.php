@@ -26,7 +26,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+Route::get('/leaderboards', [\App\Http\Controllers\LeaderboardController::class, 'index'])
+     ->name('leaderboards');
 
 // Authenticated Dashboard
 Route::get('/dashboard', function () {

@@ -1,63 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Profile • Digital Theology Classroom</title>
-  <!-- Tailwind via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
-          colors: {
-            brand: {50:'#f8f7ff',100:'#efeafe',200:'#ddd0fd',300:'#c1a6fb',400:'#a178f6',500:'#854df0',600:'#6f35d9',700:'#5b29b4',800:'#4b2392',900:'#3e1d79'}
-          },
-          boxShadow: { glow: '0 10px 30px rgba(133,77,240,.35)' },
-          backgroundImage: {
-            grid: 'radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.35) 1px, transparent 0)'
-          }
-        }
-      }
-    }
-  </script>
-  <style>.blob{filter:blur(32px);opacity:.6}</style>
-</head>
-<body class="min-h-screen bg-gradient-to-b from-brand-50 via-white to-white text-gray-900 antialiased">
-  <!-- Background decor -->
-  <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
-    <div class="absolute -top-24 -left-24 w-[36rem] h-[36rem] rounded-full bg-gradient-to-tr from-brand-300/50 to-pink-300/40 blob"></div>
-    <div class="absolute top-1/3 -right-24 w-[32rem] h-[32rem] rounded-full bg-gradient-to-tr from-indigo-200/60 to-brand-200/60 blob"></div>
-    <div class="absolute inset-0 bg-grid bg-[size:18px_18px]"></div>
-  </div>
-
-  <!-- Top bar -->
-  <header class="sticky top-0 z-30 bg-white/70 backdrop-blur border-b border-white/60">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
-        <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" 
-        alt="Logo" 
-        class="h-11 w-13 rounded-xl object-cover">
-        <span class="font-extrabold tracking-tight text-lg sm:text-xl">Digital Theology Classroom</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="{{ route('modules.index') }}" class="hover:text-brand-700">Modules</a>
-        <a href="{{ route('community') }}" class="hover:text-brand-700">Community</a>
-        <a href="{{ route('profile.edit') }}" class="text-brand-700 font-semibold">Settings</a>
-        @role('admin')
-          <a href="{{ route('admin.users') }}" class="text-brand-700">Admin</a>
-        @endrole
-      </nav>
-      <div class="flex items-center gap-2">
-        <form id="logout-form" action="{{ route('logout') }}" method="POST">@csrf</form>
-        <button onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-          class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-indigo-600 px-4 py-2 text-white font-semibold shadow-glow hover:shadow-lg">
-          Logout
-        </button>
-      </div>
-    </div>
-  </header>
+@extends('layouts.app')
+@section('title', 'Account Settings • Digital Theology Classroom')
+@section('content')
 
   <!-- Page header -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
@@ -69,17 +12,138 @@
     </div>
   </section>
 
-  <!-- Content -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-    <!-- Profile Info -->
+
+    <!-- 👤 Profile Info & Profile Picture -->
     <div class="p-[2px] rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600">
       <div class="bg-white rounded-2xl p-6 sm:p-8">
         <h2 class="text-xl sm:text-2xl font-semibold text-pink-700 mb-4">👤 Profile Information</h2>
-        @include('profile.partials.update-profile-information-form')
+
+        @if(session('status') === 'profile-updated')
+          <div class="mb-4 rounded-lg bg-green-50 text-green-800 px-4 py-3 text-sm">
+            Profile updated successfully.
+          </div>
+        @endif
+
+        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="space-y-6"
+          x-data="{ preview: null }">
+          @csrf
+          @method('PATCH')
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {{-- Avatar / Upload Card --}}
+            <div class="lg:col-span-1">
+              <div class="rounded-xl border border-slate-200 p-4">
+                <p class="text-sm font-medium text-slate-700">Profile Picture</p>
+                <p class="text-xs text-slate-500 mt-1">PNG/JPG/WebP up to 2MB.</p>
+
+                <div class="mt-4 flex items-center gap-4">
+                  {{-- Current or Preview --}}
+                  <div class="relative">
+                    <div class="w-24 h-24 rounded-full overflow-hidden ring-1 ring-slate-200 bg-slate-50">
+                      {{-- Live preview if a new file is selected --}}
+                      <img x-show="preview" x-bind:src="preview" alt="New preview" class="w-full h-full object-cover">
+                      {{-- Existing avatar if no preview --}}
+                      @php $pfp = auth()->user()->profile_picture; @endphp
+                      <img x-show="!preview && '{{ $pfp ? 1 : 0 }}' == '1'"
+                        src="{{ Storage::url($pfp) }}?v={{ \Illuminate\Support\Str::uuid() }}"
+                        alt="Current profile picture" class="w-full h-full object-cover">
+                      {{-- Placeholder if none --}}
+                      <div x-show="!preview && '{{ $pfp ? 1 : 0 }}' == '0'"
+                        class="w-full h-full flex items-center justify-center text-slate-400 text-sm">
+                        <span>No photo</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="profile_picture"
+                      class="inline-flex items-center rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 text-sm cursor-pointer">
+                      Change photo
+                    </label>
+                    <input class="hidden" id="profile_picture" name="profile_picture" type="file"
+                      accept="image/png,image/jpeg,image/webp" @change="
+                      if ($event.target.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => preview = e.target.result;
+                        reader.readAsDataURL($event.target.files[0]);
+                      } else {
+                        preview = null;
+                      }
+                    ">
+                    @error('profile_picture')
+                      <p class="text-sm text-red-600 mt-2">{{ $message }}</p>
+                    @enderror
+
+                    @if($pfp)
+                      <div class="mt-3">
+                        <label class="inline-flex items-center gap-2 text-sm text-slate-600">
+                          <input type="checkbox" name="remove_profile_picture" value="1"
+                            class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-400">
+                          Remove current photo
+                        </label>
+                      </div>
+                    @endif
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{-- Text Fields Card --}}
+            <div class="lg:col-span-2">
+              <div class="rounded-xl border border-slate-200 p-4 sm:p-6 space-y-4">
+                <div>
+                  <label for="firstName" class="block text-sm font-medium text-slate-700">First Name</label>
+                  <input id="firstName" name="firstName" type="text"
+                    value="{{ old('firstName', auth()->user()->firstName) }}"
+                    class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                  @error('firstName') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                  <label for="lastName" class="block text-sm font-medium text-slate-700">Last Name</label>
+                  <input id="lastName" name="lastName" type="text" value="{{ old('lastName', auth()->user()->lastName) }}"
+                    class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                  @error('lastName') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                </div>
+
+                <div>
+                  <label for="email" class="block text-sm font-medium text-slate-700">Email</label>
+                  <input id="email" name="email" type="email" value="{{ old('email', auth()->user()->email) }}"
+                    class="mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200">
+                  @error('email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+
+                  @if (auth()->user() instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !auth()->user()->hasVerifiedEmail())
+                    <p
+                      class="text-xs mt-2 text-amber-700 bg-amber-50 border border-amber-200 rounded px-2 py-1 inline-flex items-center gap-2">
+                      <span>Unverified email.</span>
+                      <button form="send-verification" class="underline decoration-amber-600 hover:text-amber-900">
+                        Resend verification
+                      </button>
+                    </p>
+                  @endif
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-end gap-3 pt-2">
+            <button type="submit"
+              class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-4 py-2.5 text-white font-semibold shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200">
+              Save Changes
+            </button>
+          </div>
+        </form>
+
+        {{-- Separate hidden form for resend verification (Jetstream convention) --}}
+        <form id="send-verification" method="post" action="{{ route('verification.send') }}" class="hidden">
+          @csrf
+        </form>
       </div>
     </div>
 
-    <!-- Update Password -->
+
+    <!-- 🔐 Update Password -->
     <div class="p-[2px] rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600">
       <div class="bg-white rounded-2xl p-6 sm:p-8">
         <h2 class="text-xl sm:text-2xl font-semibold text-pink-700 mb-4">🔐 Update Password</h2>
@@ -87,18 +151,13 @@
       </div>
     </div>
 
-    <!-- Delete Account -->
+    <!-- ⚠️ Delete Account -->
     <div class="p-[2px] rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600">
       <div class="bg-white rounded-2xl p-6 sm:p-8">
         <h2 class="text-xl sm:text-2xl font-semibold text-pink-700 mb-4">⚠️ Delete Account</h2>
         @include('profile.partials.delete-user-form')
       </div>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="mt-10 mb-8 text-center text-sm text-gray-500">
-    © {{ date('Y') }} Digital Theology Classroom
-  </footer>
-</body>
-</html>
+  </main>
+@endsection

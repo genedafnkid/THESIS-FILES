@@ -35,6 +35,7 @@ class RegisteredUserController extends Controller
             'lastName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'profile_picture' => 'nullable|image|max:2048',
         ]);
 
         $user = User::create([
@@ -45,10 +46,10 @@ class RegisteredUserController extends Controller
             'status' => 'pending',
         ]);
 
-        event(new Registered($user));
+        event(new Registered(user: $user));
 
-        Auth::login($user);
+        //Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('login')->with('status', 'Your account is pending admin approval.');
     }
 }

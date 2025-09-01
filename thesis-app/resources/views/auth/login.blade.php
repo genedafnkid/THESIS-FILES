@@ -82,20 +82,6 @@
                         and admonishing one another in all wisdom…”</blockquote>
                     <figcaption class="mt-2 text-sm text-white/80">Colossians 3:16</figcaption>
                 </figure>
-                <div class="mt-10 grid grid-cols-3 gap-3 text-center text-sm">
-                    <div class="rounded-xl bg-white/10 p-4">
-                        <div class="text-2xl font-extrabold">12+</div>
-                        <div class="opacity-80">Modules</div>
-                    </div>
-                    <div class="rounded-xl bg-white/10 p-4">
-                        <div class="text-2xl font-extrabold">Weekly</div>
-                        <div class="opacity-80">Mentoring</div>
-                    </div>
-                    <div class="rounded-xl bg-white/10 p-4">
-                        <div class="text-2xl font-extrabold">Live</div>
-                        <div class="opacity-80">Engagement</div>
-                    </div>
-                </div>
             </div>
         </aside>
 
@@ -174,8 +160,6 @@
                                     class="rounded border-gray-300 text-brand-600 focus:ring-brand-500">
                                 <span>Remember me</span>
                             </label>
-                            <a href="{{ route('register') }}" class="text-xs text-gray-500 hover:text-brand-700">Need an
-                                account?</a>
                         </div>
 
                         <!-- Submit -->

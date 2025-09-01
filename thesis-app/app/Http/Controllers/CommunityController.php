@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Reply;
+use App\Models\User;
 
 
 class CommunityController extends Controller
@@ -12,14 +13,16 @@ class CommunityController extends Controller
     // Show all posts
     public function index()
     {
+        $users = User::where('status', 'approved')->get(); // or filter by role, etc.
+
         $posts = Post::with([
             'user',
             'replies.user'
         ])
-        ->latest()
-        ->get();
+            ->latest()
+            ->get();
 
-        return view('community', compact('posts'));
+        return view('community', compact('posts', 'users'));
     }
 
 
@@ -49,16 +52,16 @@ class CommunityController extends Controller
         }
 
         $request->validate([
-            'content'    => 'required|max:1000',
-            'parent_id'  => 'nullable|exists:replies,id', // optional, for nested replies
+            'content' => 'required|max:1000',
+            'parent_id' => 'nullable|exists:replies,id', // optional, for nested replies
         ]);
 
         $post = Post::findOrFail($postId);
 
         Reply::create([
-            'post_id'   => $post->id,
-            'user_id'   => auth()->id(),
-            'content'   => $request->input('content'),
+            'post_id' => $post->id,
+            'user_id' => auth()->id(),
+            'content' => $request->input('content'),
         ]);
 
         return redirect()->route('community')->with('success', 'Reply posted successfully!');
@@ -133,5 +136,7 @@ class CommunityController extends Controller
 
         return redirect()->route('community')->with('success', 'Reply deleted successfully!');
     }
+
+
 
 }

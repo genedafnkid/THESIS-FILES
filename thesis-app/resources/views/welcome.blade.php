@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Digital Theology Classroom • Welcome</title>
-  <meta name="description" content="Digital Theology Classroom — AI‑enhanced e‑learning for Bible school curriculum and faith‑based formation." />
+  <title>Welcome</title>
+  <meta name="description" content="Digital Theology Classroom — Gamified e‑learning for Bible school curriculum and faith‑based formation." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -87,13 +87,13 @@
         <div>
           <div class="inline-flex items-center gap-2 rounded-full border border-brand-300/40 bg-white/70 px-3 py-1 text-xs font-semibold text-brand-800">
             <span class="h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
-            AI‑enhanced spiritual engagement
+            Gamified E‑learning for Discipleship Program
           </div>
           <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight">
             Form minds <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-700">and</span> shape hearts—online.
           </h1>
           <p class="mt-5 text-lg text-gray-600 max-w-xl">
-            The Digital Theology Classroom (DTC) blends 2D interactive storytelling, live mentorship, and AI‑powered engagement metrics to support holistic theological formation.
+            The Digital Theology Classroom (DTC) blends 2D gamified interactive storytelling, live mentorship, and community building to support holistic theological formation.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-3">
             <a href="{{ route('modules.index') }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gray-900 text-white shadow-lg hover:translate-y-[-1px] transition">
@@ -109,17 +109,14 @@
           <!-- QUICK STATS -->
           <dl class="mt-10 grid grid-cols-3 gap-3 max-w-xl">
             <div class="rounded-2xl bg-white/80 border border-gray-100 p-4 text-center">
-              <dt class="text-xs text-gray-500">Interactive Modules</dt>
-              <dd class="text-2xl font-extrabold mt-1">12+</dd>
+              <dt class="text-xs text-gray-500">Gamified Contents</dt>
+              <dd class="text-2xl font-extrabold mt-1">3</dd>
             </div>
             <div class="rounded-2xl bg-white/80 border border-gray-100 p-4 text-center">
-              <dt class="text-xs text-gray-500">Mentor Sessions</dt>
-              <dd class="text-2xl font-extrabold mt-1">Weekly</dd>
+              <dt class="text-xs text-gray-500">Earnable Badges</dt>
+              <dd class="text-2xl font-extrabold mt-1">16</dd>
             </div>
-            <div class="rounded-2xl bg-white/80 border border-gray-100 p-4 text-center">
-              <dt class="text-xs text-gray-500">Spiritual Meter</dt>
-              <dd class="text-2xl font-extrabold mt-1">Live</dd>
-            </div>
+          
           </dl>
         </div>
 
@@ -160,17 +157,9 @@
             <!-- heart pulse icon -->
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M11.246 3.017a.75.75 0 0 1 1.508 0l.401 4.216 2.027-1.959a.75.75 0 0 1 1.292.58l-.357 4.724 2.984-.996a.75.75 0 0 1 .947.957l-1.96 5.407a3 3 0 0 1-2.82 2.043H8.732a3 3 0 0 1-2.82-2.043L3.953 11.54a.75.75 0 0 1 .947-.956l2.984.996-.357-4.724a.75.75 0 0 1 1.292-.58l2.027 1.96.4-4.22Z"/></svg>
           </div>
-          <h3 class="mt-4 font-bold text-lg">Spiritual Engagement Meter</h3>
-          <p class="mt-2 text-sm text-gray-600">Live engagement scoring with gentle mentor alerts—augmenting, not replacing, human discipleship.</p>
+          <h3 class="mt-4 font-bold text-lg">Formative Quizzes & Assessments</h3>
+          <p class="mt-2 text-sm text-gray-600">Each scenario ends with thematic quizzes to reinforce key takeaways and support theological understanding.</p>
           <!-- demo meter -->
-          <div class="mt-4">
-            <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
-              <span>Today</span><span>85/100</span>
-            </div>
-            <div class="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
-              <div class="h-full w-[85%] bg-gradient-to-r from-emerald-400 via-brand-500 to-indigo-600"></div>
-            </div>
-          </div>
         </div>
         <!-- Card 3 -->
         <div class="group rounded-2xl border border-gray-100 p-6 bg-gradient-to-b from-white to-brand-50/40 hover:shadow-glow transition">
@@ -178,8 +167,8 @@
             <!-- chat icon -->
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h10.5a2.25 2.25 0 0 1 2.25 2.25v6.75A2.25 2.25 0 0 1 17.25 15H9l-4.5 4.5V6.75Z"/></svg>
           </div>
-          <h3 class="mt-4 font-bold text-lg">Live Mentorship & Prayer</h3>
-          <p class="mt-2 text-sm text-gray-600">Synchronous sessions via Zoom/Teams, integrated reflection prompts, and community prayer rooms.</p>
+          <h3 class="mt-4 font-bold text-lg">Achievement & Badging System</h3>
+          <p class="mt-2 text-sm text-gray-600">Unlock badges like Conflict Resolver, Integrity Keeper, and Rising Leader as you demonstrate spiritual and cognitive growth through gameplay.</p>
         </div>
         <!-- Card 4 -->
         <div class="group rounded-2xl border border-gray-100 p-6 bg-gradient-to-b from-white to-brand-50/40 hover:shadow-glow transition">
@@ -187,8 +176,8 @@
             <!-- journal icon -->
             <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M6.75 4.5A2.25 2.25 0 0 0 4.5 6.75v10.5A2.25 2.25 0 0 0 6.75 19.5h10.5a.75.75 0 0 0 .75-.75V6.75A2.25 2.25 0 0 0 15.75 4.5H6.75Zm8.25 3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1 0-1.5h6Zm0 3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1 0-1.5h6Zm0 3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1 0-1.5h6Z"/></svg>
           </div>
-          <h3 class="mt-4 font-bold text-lg">Reflective Journaling</h3>
-          <p class="mt-2 text-sm text-gray-600">Guided prompts with optional AI summaries to help track growth in understanding and devotion.</p>
+          <h3 class="mt-4 font-bold text-lg">Discussion Forums</h3>
+          <p class="mt-2 text-sm text-gray-600">Ask questions, share insights, or reflect on your learning journey alongside fellow students and mentors.</p>
         </div>
         <!-- Card 5 -->
         <div class="group rounded-2xl border border-gray-100 p-6 bg-gradient-to-b from-white to-brand-50/40 hover:shadow-glow transition">
@@ -245,7 +234,7 @@
               <span class="h-10 w-10 shrink-0 grid place-items-center rounded-xl bg-gray-900 text-white font-bold">4</span>
               <div>
                 <h3 class="font-bold">Track growth</h3>
-                <p class="text-gray-600 text-sm">View the Spiritual Engagement Meter and milestones over time.</p>
+                <p class="text-gray-600 text-sm">View the Leaderboard and earned badges and milestones over time.</p>
               </div>
             </li>
           </ol>
@@ -312,10 +301,6 @@
         <div class="rounded-2xl border border-gray-100 p-6">
           <h3 class="font-bold">Is the DTC only for Bible schools?</h3>
           <p class="mt-2 text-gray-600 text-sm">It’s designed for Bible schools and church discipleship programs, but adaptable to small groups and independent study.</p>
-        </div>
-        <div class="rounded-2xl border border-gray-100 p-6">
-          <h3 class="font-bold">How does the Spiritual Engagement Meter work?</h3>
-          <p class="mt-2 text-gray-600 text-sm">It aggregates participation signals (choices, reflections, attendance) and offers gentle insights for mentors. No scores are ever public by default.</p>
         </div>
         <div class="rounded-2xl border border-gray-100 p-6">
           <h3 class="font-bold">Do I need to install anything?</h3>
