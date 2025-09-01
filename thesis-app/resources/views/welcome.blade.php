@@ -61,10 +61,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <a href="/" class="flex items-center gap-2 group">
-          <span class="relative inline-flex h-8 w-8 items-center justify-center">
-            <span class="absolute inset-0 rounded-xl bg-gradient-to-br from-brand-400 to-indigo-500 shadow-glow"></span>
-            <span class="relative text-white font-black">D</span>
-          </span>
+            <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" 
+            alt="Logo" 
+            class="h-11 w-13 rounded-xl object-cover">
           <span class="font-extrabold tracking-tight text-lg sm:text-xl">Digital Theology Classroom</span>
         </a>
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -336,7 +335,9 @@
       <div class="grid md:grid-cols-3 gap-8">
         <div>
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand-400 to-indigo-600 text-white font-black">D</span>
+            <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" 
+            alt="Logo" 
+            class="h-11 w-13 rounded-xl object-cover">
             <span class="font-extrabold">Digital Theology Classroom</span>
           </div>
           <p class="mt-3 text-sm text-gray-600 max-w-sm">An e‑learning application for Bible school curriculum and faith‑based learning—where technology serves formation.</p>
