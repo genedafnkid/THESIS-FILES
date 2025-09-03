@@ -13,12 +13,12 @@ class BadgeService
         // completion
         $this->giveBadge($user, $this->completionBadge($moduleId));
 
-        // perfect quiz
+        // perfect quiz (5/5)
         if ($quizScore == 5) {
             $this->giveBadge($user, $this->quizBadge($moduleId));
         }
 
-        // perfect meter
+        // perfect meter (100/100)
         if ($meterScore == 100) {
             $this->giveBadge($user, $this->meterBadge($moduleId));
         }
@@ -61,30 +61,32 @@ class BadgeService
 
     private function checkGlobalBadges(User $user)
     {
-        $scores = $user->scores()->pluck('module_id')->unique();
+        // module_id ≡ game_number in your schema
+        $modulesCompleted = $user->scores()->pluck('game_number')->unique();
 
-        // Faithful Disciple
-        if ($scores->contains(1) && $scores->contains(2) && $scores->contains(3)) {
+        // Faithful Disciple — completed modules 1,2,3
+        if ($modulesCompleted->contains(1) && $modulesCompleted->contains(2) && $modulesCompleted->contains(3)) {
             $this->giveBadge($user, Badge::where('icon', 'grand_achievement.png')->first());
         }
 
-        // Quiz Champion
-        $perfectQuiz = $user->scores()->where('quiz_score', 100)->pluck('module_id')->unique();
+        // Quiz Champion — perfect quiz (score == 5) on modules 1,2,3
+        $perfectQuiz = $user->scores()->where('score', 5)->pluck('game_number')->unique();
         if ($perfectQuiz->contains(1) && $perfectQuiz->contains(2) && $perfectQuiz->contains(3)) {
             $this->giveBadge($user, Badge::where('icon', 'quiz_all.png')->first());
         }
 
-        // Meter Champion
-        $perfectMeter = $user->scores()->where('meter_score', 100)->pluck('module_id')->unique();
+        // Meter Champion — perfect meter (100) on modules 1,2,3
+        $perfectMeter = $user->scores()->where('meter_score', 100)->pluck('game_number')->unique();
         if ($perfectMeter->contains(1) && $perfectMeter->contains(2) && $perfectMeter->contains(3)) {
             $this->giveBadge($user, Badge::where('icon', 'meter_all.png')->first());
         }
 
-        // Complete Mastery
+        // Complete Mastery — both perfect quiz & perfect meter on 1,2,3
         $perfectBoth = $user->scores()
-            ->where('quiz_score', 100)
+            ->where('score', 5)
             ->where('meter_score', 100)
-            ->pluck('module_id')->unique();
+            ->pluck('game_number')->unique();
+
         if ($perfectBoth->contains(1) && $perfectBoth->contains(2) && $perfectBoth->contains(3)) {
             $this->giveBadge($user, Badge::where('icon', 'perfect_all.png')->first());
         }
