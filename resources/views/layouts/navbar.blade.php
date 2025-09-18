@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <!-- Logo -->
         <a href="{{ url('dashboard') }}" class="flex items-center gap-2">
-            <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" alt="Logo"
+            <img src="{{ asset('images/BLACK SMALL LOCATOR.webp') }}" alt="Logo"
                 class="h-11 w-13 rounded-xl object-cover">
             <span class="font-extrabold tracking-tight text-lg sm:text-xl"></span>
         </a>
