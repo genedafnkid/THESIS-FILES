@@ -22,7 +22,7 @@
           <!-- Game 1 -->
           <div class="group">
             <a href="{{ url('/play1') }}" class="block aspect-video rounded-2xl overflow-hidden shadow hover:shadow-lg transition">
-              <img src="{{ asset('images/thumbnail-1.png') }}" alt="Conflict Resolution"
+              <img src="{{ asset('images/thumbnail-1.webp') }}" alt="Conflict Resolution"
                    class="w-full h-full object-cover group-hover:scale-105 duration-300">
             </a>
             <h3 class="mt-2 text-sm font-semibold text-gray-800">Game 1: Conflict Resolution</h3>
@@ -32,7 +32,7 @@
           <!-- Game 2 -->
           <div class="group">
             <a href="{{ url('/play2') }}" class="block aspect-video rounded-2xl overflow-hidden shadow hover:shadow-lg transition">
-              <img src="{{ asset('images/thumbnail-2.png') }}" alt="Integrity at Work"
+              <img src="{{ asset('images/thumbnail-2.webp') }}" alt="Integrity at Work"
                    class="w-full h-full object-cover group-hover:scale-105 duration-300">
             </a>
             <h3 class="mt-2 text-sm font-semibold text-gray-800">Game 2: Integrity at Work</h3>
@@ -41,7 +41,7 @@
 
           <div class="group">
             <a href="{{ url('/play3') }}" class="block aspect-video rounded-2xl overflow-hidden shadow hover:shadow-lg transition">
-              <img src="{{ asset('images/thumbnail-3.png') }}" alt="Integrity at Work"
+              <img src="{{ asset('images/thumbnail-3.webp') }}" alt="Integrity at Work"
                    class="w-full h-full object-cover group-hover:scale-105 duration-300">
             </a>
             <h3 class="mt-2 text-sm font-semibold text-gray-800">Game 3: Leadership in Space</h3>

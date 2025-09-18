@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Register</title>
   <!-- Tailwind via CDN (fine for Blade views) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  @vite(entrypoints: ['resources/js/app.js'])
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-slate-100 via-white to-slate-100">
@@ -15,7 +15,7 @@
       <div class="mb-6 text-center">
         <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-slate-700 hover:text-slate-900">
           <!-- logo placeholder -->
-          <img src="{{ asset('images/BLACK SMALL LOCATOR.png') }}" alt="Logo" class="h-11 w-13 rounded-xl object-cover">
+          <img src="{{ asset('images/BLACK SMALL LOCATOR.webp') }}" alt="Logo" class="h-11 w-13 rounded-xl object-cover">
           <span class="text-xl font-semibold">Digital Theology Classroom</span>
         </a>
         <h1 class="mt-4 text-2xl font-bold text-slate-900">Create your account</h1>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Forgot Password</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  @vite(entrypoints: ['resources/js/app.js'])
 </head>
 <body class="min-h-screen bg-gradient-to-br from-slate-100 via-white to-slate-100">
   <div class="flex min-h-screen items-center justify-center p-6">

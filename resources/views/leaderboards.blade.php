@@ -64,13 +64,13 @@
           function user_avatar_url($user)
           {
             if (!$user)
-              return asset('images/default-avatar.png');
+              return asset('images/default-avatar.webp');
 
             if (!empty($user->profile_picture)) {
               return Storage::url($user->profile_picture);
             }
 
-            return asset('images/default-avatar.png');
+            return asset('images/default-avatar.webp');
           }
         @endphp
 

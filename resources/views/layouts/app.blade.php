@@ -9,31 +9,9 @@
   <title>@yield('title', config('app.name', 'Digital Theology Classroom'))</title>
 
   {{-- Fonts --}}
-  <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
   {{-- Tailwind (CDN, if you’re not fully on Vite) --}}
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter','ui-sans-serif','system-ui'] },
-          colors: {
-            brand: {
-              50:'#f8f7ff',100:'#efeafe',200:'#ddd0fd',300:'#c1a6fb',
-              400:'#a178f6',500:'#854df0',600:'#6f35d9',700:'#5b29b4',
-              800:'#4b2392',900:'#3e1d79'
-            }
-          },
-          boxShadow: { glow: '0 10px 30px rgba(133,77,240,.35)' },
-          backgroundImage: {
-            grid: 'radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.35) 1px, transparent 0)'
-          }
-        }
-      }
-    }
-  </script>
+  @vite(entrypoints: ['resources/js/app.js'])
   <style>.blob{filter:blur(32px);opacity:.6}</style>
 
   {{-- Vite build --}}

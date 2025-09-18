@@ -5,31 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Sign in • Digital Theology Classroom</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    {{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
-                    colors: {
-                        brand: {
-                            50: '#f8f7ff', 100: '#efeafe', 200: '#ddd0fd', 300: '#c1a6fb',
-                            400: '#a178f6', 500: '#854df0', 600: '#6f35d9', 700: '#5b29b4', 800: '#4b2392', 900: '#3e1d79',
-                        }
-                    },
-                    boxShadow: { glow: '0 10px 30px rgba(133, 77, 240, 0.35)' },
-                    backgroundImage: {
-                        grid: "radial-gradient(circle at 1px 1px, rgb(255 255 255 / 0.35) 1px, transparent 0)",
-                    }
-                }
-            }
-        }
-    </script>
+    @vite(entrypoints: ['resources/js/app.js'])
     <style>
         .blob {
             filter: blur(38px);
@@ -70,9 +46,8 @@
             class="hidden lg:flex lg:w-[45%] xl:w-1/2 p-10 bg-gradient-to-br from-brand-500 to-indigo-700 text-white">
             <div class="max-w-xl my-auto">
                 <a href="/" class="inline-flex items-center gap-3">
-                    <img src="{{ asset('images/WHITE SMALL LOCATOR.png') }}" 
-                    alt="Logo" 
-                    class="h-11 w-13 rounded-xl object-cover">
+                    <img src="{{ asset('images/WHITE SMALL LOCATOR.webp') }}" alt="Logo"
+                        class="h-11 w-13 rounded-xl object-cover">
                     <span class="text-2xl font-extrabold">Digital Theology Classroom</span>
                 </a>
                 <h1 class="mt-10 text-4xl font-black leading-tight">Welcome back.</h1>
@@ -101,7 +76,8 @@
                 <!-- Session Status -->
                 @if (session('status'))
                     <div class="mb-4 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 px-4 py-3 text-sm">
-                        {{ session('status') }}</div>
+                        {{ session('status') }}
+                    </div>
                 @endif
 
                 <div class="rounded-2xl border border-gray-100 bg-white/80 p-6 shadow-xl">

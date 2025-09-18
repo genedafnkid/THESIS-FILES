@@ -61,7 +61,7 @@
                     <img src="{{ Storage::url($user->profile_picture) }}" alt="{{ $user->firstName }} {{ $user->lastName }}"
                       class="w-20 h-20 rounded-full object-cover border">
                   @else
-                    <img src="{{ asset('images/default-avatar.png') }}" alt="Default Avatar"
+                    <img src="{{ asset('images/default-avatar.webp') }}" alt="Default Avatar"
                       class="w-20 h-20 rounded-full object-cover border">
                   @endif
 
