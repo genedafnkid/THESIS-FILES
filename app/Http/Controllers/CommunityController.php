@@ -47,9 +47,6 @@ class CommunityController extends Controller
     // Store reply (Only Students)
     public function reply(Request $request, $postId)
     {
-        if (!auth()->user()->hasRole('student')) {
-            abort(403, 'Only students can reply to posts.');
-        }
 
         $request->validate([
             'content' => 'required|max:1000',

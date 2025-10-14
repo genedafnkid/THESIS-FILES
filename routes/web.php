@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware(['role:student'])->group(function () {
-        Route::get('/student/dashboard', [StudentController::class, 'index']);
+        Route::get('/student/dashboard', action: [StudentController::class, 'index']);
     });
 
     Route::resource('modules', ModuleController::class);
