@@ -126,6 +126,9 @@
   @endif
 
   <!-- Announcements -->
+  {{-- =======================
+  Announcements (inline edit)
+  ======================= --}}
   @php($announcements = $announcements ?? collect())
   <section id="announcements" class="mb-16">
     <div class="p-[2px] rounded-2xl bg-gradient-to-r from-pink-500 to-purple-600">
@@ -140,17 +143,23 @@
         <ul class="space-y-3">
           @forelse($announcements as $announcement)
             <li class="bg-gray-50 p-4 rounded-xl border border-gray-100">
-              <p class="text-gray-800">{{ $announcement->content }}</p>
+              <p class="text-gray-800 whitespace-pre-line">{{ $announcement->content }}</p>
+
               <div class="mt-2 flex flex-wrap items-center justify-between gap-2 text-sm text-gray-500">
                 <div>
                   <span class="font-semibold text-purple-700">{{ optional($announcement->user)->name }}</span>
                   <span class="mx-1">•</span>
                   <span>{{ $announcement->created_at?->format('M d, Y') }}</span>
                 </div>
+
                 @role('admin|instructor')
                 <div class="flex items-center gap-3">
-                  <a href="{{ route('announcements.edit', $announcement->id) }}" class="text-blue-600 hover:underline">✏️
-                    Edit</a>
+                  {{-- Open modal instead of navigating to announcements.edit --}}
+                  <button type="button" class="text-blue-600 hover:underline"
+                    data-edit-target="announcement-{{ $announcement->id }}">
+                    ✏️ Edit
+                  </button>
+
                   <form action="{{ route('announcements.destroy', $announcement->id) }}" method="POST"
                     onsubmit="return confirm('Delete this announcement?');">
                     @csrf
@@ -161,6 +170,27 @@
                 @endrole
               </div>
             </li>
+
+            {{-- Edit Announcement Modal (inline) --}}
+            @role('admin|instructor')
+            <div id="modal-announcement-{{ $announcement->id }}" class="hidden fixed inset-0 z-50 bg-black/50 p-4">
+              <div class="mx-auto max-w-md rounded-2xl bg-white p-6 shadow-xl">
+                <h3 class="text-lg font-bold text-purple-700 mb-3">Edit Announcement</h3>
+                <form action="{{ route('announcements.update', $announcement->id) }}" method="POST" class="space-y-3">
+                  @csrf
+                  @method('PUT')
+                  <textarea name="content" rows="4" class="w-full rounded-xl border p-3" required
+                    maxlength="5000">{{ old('content', $announcement->content) }}</textarea>
+                  <div class="flex justify-end gap-2">
+                    <button type="button" data-close="#modal-announcement-{{ $announcement->id }}"
+                      class="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Cancel</button>
+                    <button type="submit"
+                      class="px-4 py-2 rounded-xl bg-green-600 text-white hover:bg-green-700">Save</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            @endrole
           @empty
             <li class="text-gray-500">No announcements yet.</li>
           @endforelse
@@ -171,8 +201,8 @@
           <form action="{{ route('announcements.store') }}" method="POST" class="space-y-3">
             @csrf
             <textarea name="content" rows="3"
-              class="w-full rounded-xl border border-gray-300 p-3 focus:border-brand-500 focus:ring-2 focus:ring-brand-200"
-              placeholder="Write a new announcement..."></textarea>
+              class="w-full rounded-xl border border-gray-300 p-3 focus:border-purple-500 focus:ring-2 focus:ring-purple-200"
+              placeholder="Write a new announcement..." required maxlength="5000">{{ old('content') }}</textarea>
             <button type="submit"
               class="inline-flex items-center gap-2 rounded-xl bg-purple-600 px-4 py-2 text-white hover:bg-purple-700">
               ➕ Post Announcement
@@ -183,6 +213,27 @@
       </div>
     </div>
   </section>
+
+  {{-- Modal toggles --}}
+  <script>
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-edit-target]');
+      if (btn) {
+        const id = btn.getAttribute('data-edit-target'); // e.g. "announcement-123"
+        const modal = document.getElementById('modal-' + id);
+        if (modal) { modal.classList.remove('hidden'); document.documentElement.classList.add('modal-open'); }
+      }
+      const closeBtn = e.target.closest('[data-close]');
+      if (closeBtn) {
+        const sel = closeBtn.getAttribute('data-close');
+        const modal = document.querySelector(sel);
+        if (modal) { modal.classList.add('hidden'); document.documentElement.classList.remove('modal-open'); }
+      }
+      if (e.target.classList.contains('bg-black/50')) {
+        e.target.classList.add('hidden'); document.documentElement.classList.remove('modal-open');
+      }
+    });
+  </script>
 
 </main>
 @endsection

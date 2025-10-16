@@ -68,8 +68,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/replies/{reply}', [CommunityController::class, 'updateReply'])->name('replies.update');
     Route::delete('/replies/{reply}', [CommunityController::class, 'destroyReply'])->name('replies.destroy');
 
-    Route::resource('announcements', AnnouncementController::class);
+    Route::middleware(['auth'])->group(function () {
+        // Show the dashboard where announcements appear (if you route it this way)
+        Route::get('/dashboard', [AnnouncementController::class, 'index'])->name('dashboard');
 
+        // Announcements (no separate edit page needed)
+        Route::resource('announcements', AnnouncementController::class)
+            ->only(['index', 'store', 'update', 'destroy']);
+    });
     Route::middleware(['role:instructor'])->group(function () {
         Route::get('/instructor/dashboard', [InstructorController::class, 'index']);
     });
