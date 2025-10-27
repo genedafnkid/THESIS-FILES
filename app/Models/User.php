@@ -85,16 +85,25 @@ class User extends Authenticatable
     {
         return $this->hasMany(Score::class);
     }
- 
+
     public function setFirstNameAttribute($value)
     {
-        $this->attributes['firstName'] = ucfirst(strtolower($value));
+        $this->attributes['firstName'] = ucwords(strtolower($value));
     }
+
 
     public function setLastNameAttribute($value)
     {
         $this->attributes['lastName'] = ucfirst(strtolower($value));
     }
+
+    public function getDisplayNameAttribute()
+    {
+        $first = ucwords(strtolower($this->firstName ?? ''));
+        $last = ucfirst(strtolower($this->lastName ?? ''));
+        return trim("{$first} {$last}");
+    }
+
 
 
     public $incrementing = false;
