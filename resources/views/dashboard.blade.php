@@ -66,31 +66,6 @@
 
       <!-- Progress -->
 
-      <!-- Student-only tile -->
-      @role('student|admin')
-      <div class="md:col-span-3">
-        <div class="p-[2px] rounded-2xl bg-gradient-to-r from-pink-400 to-purple-500">
-          <div class="bg-white p-6 rounded-2xl shadow">
-            <h2 class="text-2xl font-bold text-purple-700">🎯 Student Progress</h2>
-            <p class="text-gray-600 mt-1">Your personal milestones and XP.</p>
-            <div class="mt-4 grid sm:grid-cols-3 gap-4">
-              <div class="rounded-xl bg-gray-50 p-4">
-                <div class="text-xs text-gray-500">Completed Modules</div>
-                <div class="text-2xl font-extrabold">4</div>
-              </div>
-              <div class="rounded-xl bg-gray-50 p-4">
-                <div class="text-xs text-gray-500">Quizzes Passed</div>
-                <div class="text-2xl font-extrabold">9</div>
-              </div>
-              <div class="rounded-xl bg-gray-50 p-4">
-                <div class="text-xs text-gray-500">Consistency Streak</div>
-                <div class="text-2xl font-extrabold">12d</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endrole
     </div>
   </section>
 

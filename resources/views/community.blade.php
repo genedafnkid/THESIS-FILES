@@ -65,7 +65,7 @@
                                 @endif
                                 <div>
                                     <p class="font-bold text-slate-800">
-                                        {{ $post->user->firstName }} {{ $post->user->lastName }}
+                                        {{ $post->user->display_name }}
                                     </p>
                                     <p class="text-sm text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
                                 </div>
@@ -135,7 +135,7 @@
                                             <div class="flex-1">
                                                 <div class="flex items-center justify-between">
                                                     <p class="text-sm font-semibold text-purple-600">
-                                                        {{ $reply->user->firstName }} {{ $reply->user->lastName }}
+                                                        {{ $reply->user->display_name }}
                                                     </p>
                                                     <p class="text-xs text-gray-400">{{ $reply->created_at->diffForHumans() }}</p>
                                                 </div>
